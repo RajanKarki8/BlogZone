@@ -1,0 +1,21 @@
+{%extends 'post/base.html'%}
+
+{%block content%}
+    <div class = 'container-fluid'>
+        <h2>{{post.title}}</h2> by <h5>{{post.author}}</h5><br>
+        <p>{{post.content}}</p><br>
+        <p>{{post.date_created}}</p>
+    </div>
+    <strong>Comments...</strong><hr>
+        {%if not post.comments.all%}
+        <p>No comments yet..</p><a href="{%url 'comment' post.pk%}">Add Comment</a>
+        
+        {%else%}
+        <a href="{%url 'comment' post.pk%}">Add Comment</a><br>
+        {%for comment in post.comments.all%}
+        <strong>{{comment.author}} - {{comment.comment_date}}</strong>
+        <p>{{comment.desc}}</p>
+        {%endfor%}
+        <hr>
+        {%endif%}
+{%endblock content%}
