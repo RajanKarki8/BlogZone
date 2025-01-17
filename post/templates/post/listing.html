@@ -1,11 +1,29 @@
-{%extends 'post/base.html'%}
+{% extends 'post/base.html' %}
 
-{%block content%}
-    <div class = 'container-fluid'>
-        {%for post in posts%}
-        <h2><a href="{%url 'details' post.id%}">{{post.title}}</a></h2> by <h5>{{post.author}}</h5><br>
-        <p>{{post.content}}</p><br>
-        <p>{{post.date_created}}</p><br>
-        {%endfor%}
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a href="{% url 'details' post.id %}" class="text-decoration-none text-dark">{{ post.title }}</a>
+                    </h2>
+                    <h5 class="text-muted">by {{ post.author }}</h5>
+                    <p class="card-text mt-3">
+                        {{ post.content|truncatewords:20 }}
+                        <a href="{% url 'details' post.id %}" class="text-primary">Read more</a>
+                    </p>
+                    <p class="text-muted small">{{ post.date_created|date:"F d, Y" }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-{%endblock content%}
+</div>
+{% endblock content %}
+
+
+
+

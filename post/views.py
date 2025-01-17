@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment
 from .forms import CommentForm
+from django.contrib.auth.decorators import login_required
 
 def Home(request):
     posts = Post.objects.all().order_by('-date_created')
